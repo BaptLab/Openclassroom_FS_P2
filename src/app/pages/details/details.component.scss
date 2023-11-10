@@ -1,0 +1,9 @@
+#stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  .stat-container span {
+    display: flex;
+    justify-content: center;
+  }
+}
