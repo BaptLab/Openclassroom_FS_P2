@@ -1,5 +1,10 @@
+<!-- Page title -->
 <h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
 
-<app-pie-chart></app-pie-chart>
+<!-- Horizontal line as a visual separator -->
+<hr />
+
+<div *ngIf="olympics$ | async">
+  <!-- Render the PieChartComponent with the Olympic data as an input -->
+  <app-pie-chart [data]="olympics$ | async"></app-pie-chart>
+</div>

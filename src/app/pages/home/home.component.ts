@@ -8,11 +8,18 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  // Observable to hold Olympic data, initialized with an observable of null
   public olympics$: Observable<any> = of(null);
 
+  // Inject OlympicService into the constructor
   constructor(private olympicService: OlympicService) {}
 
+  // Lifecycle hook called after the component is initialized
   ngOnInit(): void {
+    // Subscribe to the Olympic data observable from the service
     this.olympics$ = this.olympicService.getOlympics();
+
+    // Log the observable (not the data) to the console (for debugging purposes)
+    console.log(this.olympics$);
   }
 }

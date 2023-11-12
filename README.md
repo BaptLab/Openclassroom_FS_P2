@@ -1,3 +1,9 @@
+# TO DO :
+
+- clickable part of the pie that change the route to "Details" and pass the country name as a parameter in the URL ;
+- pass/get the data from the back ;
+- Display the graph for any data ;
+
 # OlympicGamesStarter
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
