@@ -1,15 +1,20 @@
 <div id="stats-container">
   <div class="stat-container">
     <h2>Number of entries</h2>
-    <span>{{ numberOfEntries }}</span>
+    <span></span>
   </div>
   <div class="stat-container">
     <h2>Total number of medals</h2>
-    <span>{{ numberOfMedals }}</span>
+    <span></span>
   </div>
   <div class="stat-container">
     <h2>Total number of athletes</h2>
-    <span>{{ numberOfAthletes }}</span>
+    <span></span>
   </div>
 </div>
-<app-line-chart></app-line-chart>
+<div *ngIf="olympics$ | async">
+  <app-line-chart
+    [data]="olympics$ | async"
+    [country]="countryName"
+  ></app-line-chart>
+</div>

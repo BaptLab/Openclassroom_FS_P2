@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
   selector: 'app-details',
@@ -6,15 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  public numberOfEntries: number;
+  /* public numberOfEntries: number;
   public numberOfAthletes: number;
-  public numberOfMedals: number;
+  public numberOfMedals: number; */
+  public countryName: string = '';
 
-  constructor() {
-    this.numberOfEntries = 15;
+  public olympics$: Observable<any> = of(null);
+
+  constructor(
+    private olympicService: OlympicService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.countryName = this.route.snapshot.params['country'];
+    this.olympics$ = this.olympicService.getOlympics();
+    console.log(this.olympics$);
+    /* this.numberOfEntries = 15;
     this.numberOfMedals = 40;
-    this.numberOfAthletes = 109;
+    this.numberOfAthletes = 109; */
   }
-
-  ngOnInit(): void {}
 }
