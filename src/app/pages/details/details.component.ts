@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, tap, catchError } from 'rxjs';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -20,7 +20,8 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private olympicService: OlympicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -65,6 +66,10 @@ export class DetailsComponent implements OnInit {
       console.warn('Country input is not provided or is an empty string.');
       this.participationData = [];
     }
+  }
+
+  navigateToHomepage() {
+    this.router.navigateByUrl('');
   }
 
   private calculateStatistics(data: any) {

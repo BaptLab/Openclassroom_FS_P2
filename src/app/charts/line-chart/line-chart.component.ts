@@ -40,6 +40,7 @@ export class LineChartComponent implements OnInit {
         labels: this.chartData.map((participation) => participation.year),
         datasets: [
           {
+            label: 'Médaille(s) par participation',
             data: this.chartData.map(
               (participation) => participation.medalsCount
             ),

@@ -1,9 +1,29 @@
-#stats-container {
+#global-stats-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 50px;
-  .stat-container span {
+  align-items: center;
+  margin-bottom: 40px;
+
+  h1 {
+    background-color: #008e97;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+  }
+  .stat-container {
     display: flex;
-    justify-content: center;
+    gap: 40px;
+
+    .single-stat-container {
+      padding: 5px 15px;
+      border: 3px solid #008e97;
+      border-radius: 20px;
+
+      span {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }
