@@ -1,5 +1,6 @@
 // Import necessary components and modules from Angular and Chart.js
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
 import { Participation } from 'src/app/core/models/Participation';
@@ -22,7 +23,7 @@ export class PieChartComponent implements OnInit {
   public pieChart: any;
 
   // Constructor method, registering Chart.js plugins
-  constructor() {
+  constructor(private router: Router) {
     Chart.register(...registerables);
   }
 
@@ -70,7 +71,12 @@ export class PieChartComponent implements OnInit {
         ],
       },
       // Specify additional chart options (currently empty in this example)
-      options: {},
+      options: {
+        onClick: (e, chartElements) => {
+          const countryClicked = this.countryData[chartElements[0].index];
+          this.router.navigateByUrl('details/' + countryClicked);
+        },
+      },
     });
   }
 }
