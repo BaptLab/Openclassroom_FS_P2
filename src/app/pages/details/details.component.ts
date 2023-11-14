@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, tap, catchError } from 'rxjs';
-import { OlympicCountry } from 'src/app/core/models/Olympic';
 import { Participation } from 'src/app/core/models/Participation';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
@@ -11,10 +10,10 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  public countryName: string = '';
-  public numberOfEntries: number = 0;
-  public numberOfMedals: number = 0;
-  public numberofAthletes: number = 0;
+  public countryName = '';
+  public numberOfEntries = 0;
+  public numberOfMedals = 0;
+  public numberofAthletes = 0;
 
   public participationData: Array<Participation> = [];
   public olympics$: Observable<any> = of(null);
@@ -22,8 +21,7 @@ export class DetailsComponent implements OnInit {
   constructor(
     private olympicService: OlympicService,
     private route: ActivatedRoute,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -42,8 +40,6 @@ export class DetailsComponent implements OnInit {
           this.numberOfEntries = numberOfEntries;
           this.numberOfMedals = numberOfMedals;
           this.numberofAthletes = numberofAthletes;
-
-          this.cdr.detectChanges();
         }
       })
     );

@@ -1,24 +1,26 @@
 <button (click)="navigateToHomepage()">Retour</button>
-<div id="global-stats-container">
-  <h1>Medals per Country</h1>
-  <div class="stat-container">
-    <div class="single-stat-container">
-      <h2>Number of entries</h2>
-      <span>{{ numberOfEntries }}</span>
-    </div>
-    <div class="single-stat-container">
-      <h2>Total number of medals</h2>
-      <span>{{ numberOfMedals }}</span>
-    </div>
-    <div class="single-stat-container">
-      <h2>Total number of athletes</h2>
-      <span>{{ numberofAthletes }}</span>
+<div *ngIf="olympics$ | async">
+  <div id="global-stats-container">
+    <h1>Medals per Country</h1>
+    <div class="stat-container">
+      <div class="single-stat-container">
+        <h2>Number of entries</h2>
+        <span>{{ numberOfEntries }}</span>
+      </div>
+      <div class="single-stat-container">
+        <h2>Total number of medals</h2>
+        <span>{{ numberOfMedals }}</span>
+      </div>
+      <div class="single-stat-container">
+        <h2>Total number of athletes</h2>
+        <span>{{ numberofAthletes }}</span>
+      </div>
     </div>
   </div>
-</div>
-<div *ngIf="olympics$ | async">
-  <app-line-chart
-    [chartData]="participationData"
-    [country]="countryName"
-  ></app-line-chart>
+  <div>
+    <app-line-chart
+      [chartData]="participationData"
+      [country]="countryName"
+    ></app-line-chart>
+  </div>
 </div>

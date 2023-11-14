@@ -1,35 +1,75 @@
 # TO DO :
 
-- clickable part of the pie that change the route to "Details" and pass the country name as a parameter in the URL ;
-- pass/get the data from the back ;
-- Display the graph for any data ;
+- udpate css ;
+- update all Any ;
 
-# OlympicGamesStarter
+# Introduction
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Il s'agit du projet n°2 de la formation de Développeur Full-Stack - Java et Angular d'Openclassroom.
 
-Don't forget to install your node_modules before starting (`npm install`).
+Le but de cette application est de mettre à disposition des utilisateurs un dashboard permettant de visualiser les informations des précédents Jeux olympiques (nombre de médailles par pays, etc.).
 
-## Development server
+L'application est composé de trois pages :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Page d'accueil : page principale où l'on retrouve un graphique circulaire représentant cinq pays participant aux JO et dont la taille de chaque pays dépend du nombre de médailles gagnées ;
+- Page détails : page de détail pour visualiser les informations statistiques selon les pays, on retrouve des données simple et un second graphique qui présente la performance par année ;
+- Page 'Not Found' : page d'erreur en cas de mauvaise saisie de l'URL.
 
-## Build
+Infos : Pour obtenir le détail d'un pays, il faut cliquer sur la pays que l'on souhaite visualiser directement sur le graph de la page d'accueil.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Pièces jointes fournies en amont du projet :
 
-## Where to start
+- [Starter code Github](https://github.com/OpenClassrooms-Student-Center/Developpez-le-front-end-en-utilisant-Angular)
+- [Spécification](<https://course.oc-static.com/projects/D%C3%A9v_Full-Stack/D%C3%A9veloppez+le+front-end+en+utilisant+Angular/Spe%CC%81cifications+(cahier+des+charges).pdf>)
+- [Maquettes](<https://course.oc-static.com/projects/D%C3%A9v_Full-Stack/D%C3%A9veloppez+le+front-end+en+utilisant+Angular/Spe%CC%81cifications+(cahier+des+charges).pdf>)
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+Compétences évaluées :
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+- Développer le front-end d'un programme en utilisant du code Angular maintenable ;
+- Gérer le versionnage de code avec Git et GitHub.
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+## Installation
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-You're now ready to implement the requested features.
+Assurez-vous de l'installer avant de poursuivre avec la commande :
 
-Good luck!
+```bash
+npm install -g @angular/cli@14.1.3
+```
+
+N'oubliez pas d'installer les dépendances en exécutant la commande suivante dans le répertoire du projet :
+
+```bash
+npm install
+```
+
+## Serveur de Développement
+
+Pour lancer le serveur de développement, utilisez la commande suivante :
+
+```bash
+ng serve
+```
+
+Accédez à http://localhost:4200/ dans votre navigateur. L'application se rechargera automatiquement si vous apportez des modifications aux fichiers source.
+
+## Mise en production
+
+Pour construire le projet en vue de la production, utilisez la commande suivante :
+
+```bash
+ng build
+```
+
+Les artefacts de construction seront stockés dans le répertoire dist/.
+
+## Informations supplémentaires
+
+- Ce projet utilise Angular version 14.1.3. Assurez-vous de vérifier la compatibilité lors de mises à jour ou l'installation de packages supplémentaires.
+- N'hésitez pas à personnaliser le projet en fonction de vos besoins spécifiques.
+- Pour plus d'informations sur les commandes Angular CLI et la structure du projet, consultez la documentation officielle d'Angular.
+
+## Licence
+
+Ce projet est sous [licence MIT](https://chat.openai.com/c/LICENSE) - consultez le fichier [LICENSE](https://chat.openai.com/c/LICENSE) pour plus de détails.
