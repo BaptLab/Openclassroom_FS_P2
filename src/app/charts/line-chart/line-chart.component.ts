@@ -20,18 +20,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.setUpLineChart();
-    console.log('fetchedData : ', this.chartData);
   }
-
-  /* Calculation for medal count */
-  /* this.participationData.map(
-    (participations: Participation[]) =>
-      participations.reduce(
-        (totalMedals: number, participation: Participation) =>
-          totalMedals + participation.medalsCount,
-        0
-      )
-  ); */
 
   private setUpLineChart() {
     this.lineChart = new Chart('line-chart-canvas', {

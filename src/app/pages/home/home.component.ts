@@ -18,8 +18,5 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to the Olympic data observable from the service
     this.olympics$ = this.olympicService.getOlympics();
-
-    // Log the observable (not the data) to the console (for debugging purposes)
-    console.log(this.olympics$);
   }
 }

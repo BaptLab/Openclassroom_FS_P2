@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, tap, catchError } from 'rxjs';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
+import { Participation } from 'src/app/core/models/Participation';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -15,13 +16,14 @@ export class DetailsComponent implements OnInit {
   public numberOfMedals: number = 0;
   public numberofAthletes: number = 0;
 
-  public participationData: Array<any> = [];
+  public participationData: Array<Participation> = [];
   public olympics$: Observable<any> = of(null);
 
   constructor(
     private olympicService: OlympicService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -29,19 +31,19 @@ export class DetailsComponent implements OnInit {
     this.olympics$ = this.olympicService.getOlympics().pipe(
       catchError((error) => {
         console.error('Error fetching Olympic data:', error);
-        return of(null); // Return an empty observable or handle the error as appropriate
+        return of(null);
       }),
       tap((formattedData) => {
         if (formattedData) {
           this.participationData = this.extractParticipationData(formattedData);
           const { numberOfEntries, numberOfMedals, numberofAthletes } =
             this.calculateStatistics(this.participationData);
-          console.log(this.participationData);
 
-          // Use the values directly within this block
           this.numberOfEntries = numberOfEntries;
           this.numberOfMedals = numberOfMedals;
           this.numberofAthletes = numberofAthletes;
+
+          this.cdr.detectChanges();
         }
       })
     );
@@ -74,7 +76,6 @@ export class DetailsComponent implements OnInit {
 
   private calculateStatistics(data: any) {
     const numberOfEntries = data.length;
-    console.log(data);
     const numberOfMedals = data.reduce(
       (totalMedals: any, participation: any) =>
         totalMedals + participation.medalsCount,
