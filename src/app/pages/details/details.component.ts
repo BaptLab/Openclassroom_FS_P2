@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { OlympicCountry, Participation } from 'src/app/core/models/Olympic';
+import {
+  OlympicCountry,
+  Participation,
+  Statistics,
+} from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-
-interface Statistics {
-  numberOfEntries: number;
-  numberOfMedals: number;
-  numberofAthletes: number;
-}
 
 @Component({
   selector: 'app-details',

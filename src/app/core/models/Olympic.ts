@@ -1,5 +1,3 @@
-// TODO: create here a typescript interface for an olympic country
-
 export interface Participation {
   id: number;
   year: number;
@@ -12,4 +10,10 @@ export interface OlympicCountry {
   id: number;
   country: string;
   participations: Participation[];
+}
+
+export interface Statistics {
+  numberOfEntries: number;
+  numberOfMedals: number;
+  numberofAthletes: number;
 }
