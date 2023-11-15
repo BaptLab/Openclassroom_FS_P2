@@ -1,3 +1,15 @@
 #chart-container {
-  width: 50%;
+  width: 70%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  min-height: 500px;
+}
+
+@media screen and (max-width: 767px) {
+  #chart-container {
+    width: 70%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    min-height: 500px;
+  }
 }

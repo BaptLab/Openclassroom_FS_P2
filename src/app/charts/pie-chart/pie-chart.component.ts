@@ -76,6 +76,8 @@ export class PieChartComponent implements OnInit {
           const countryClicked = this.countryData[chartElements[0].index];
           this.router.navigateByUrl('details/' + countryClicked);
         },
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }

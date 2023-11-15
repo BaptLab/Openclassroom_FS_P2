@@ -42,6 +42,8 @@ export class LineChartComponent implements OnInit {
             suggestedMax: 80,
           },
         },
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }
