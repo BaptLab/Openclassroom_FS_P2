@@ -4,7 +4,7 @@
 <!-- Horizontal line as a visual separator -->
 <hr />
 
-<div id="pie-chart-container" *ngIf="olympics$ | async">
+<div id="pie-chart-container" *ngIf="dataInput.length > 0">
   <!-- Render the PieChartComponent with the Olympic data as an input -->
-  <app-pie-chart [data]="olympics$ | async"></app-pie-chart>
+  <app-pie-chart [data]="dataInput"></app-pie-chart>
 </div>

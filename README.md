@@ -1,7 +1,6 @@
 # TO DO :
 
-- udpate css ;
-- update all Any ;
+- deal with error cases ;
 
 # Introduction
 

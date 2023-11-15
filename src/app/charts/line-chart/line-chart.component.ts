@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { OlympicCountry } from 'src/app/core/models/Olympic';
-import { Participation } from 'src/app/core/models/Participation';
+import { OlympicCountry, Participation } from 'src/app/core/models/Olympic';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,13 +11,14 @@ export class LineChartComponent implements OnInit {
   @Input() chartData: Array<Participation> = [];
   @Input() country: string = '';
 
-  public lineChart: any;
+  public lineChart: Chart | null = null;
 
   constructor() {
     Chart.register(...registerables);
   }
 
   ngOnInit(): void {
+    console.log(this.chartData);
     this.setUpLineChart();
   }
 

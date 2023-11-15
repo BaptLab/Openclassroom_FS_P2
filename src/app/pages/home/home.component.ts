@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { OlympicCountry } from 'src/app/core/models/Olympic';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +8,9 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  // Observable to hold Olympic data, initialized with an observable of null
-  public olympics$: Observable<any> = of(null);
+  // Observable to hold Olympic data, initialized with an observable of an empty array
+  public olympics$ = this.olympicService.getOlympics();
+  public dataInput: OlympicCountry[] = [];
 
   // Inject OlympicService into the constructor
   constructor(private olympicService: OlympicService) {}
@@ -17,6 +18,11 @@ export class HomeComponent implements OnInit {
   // Lifecycle hook called after the component is initialized
   ngOnInit(): void {
     // Subscribe to the Olympic data observable from the service
-    this.olympics$ = this.olympicService.getOlympics();
+    this.olympics$.subscribe((data) => {
+      // Check if data is an array before assigning it
+      if (Array.isArray(data)) {
+        this.dataInput = data;
+      }
+    });
   }
 }

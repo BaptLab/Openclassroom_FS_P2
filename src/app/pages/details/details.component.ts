@@ -1,8 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, tap, catchError } from 'rxjs';
-import { Participation } from 'src/app/core/models/Participation';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { OlympicCountry, Participation } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+
+interface Statistics {
+  numberOfEntries: number;
+  numberOfMedals: number;
+  numberofAthletes: number;
+}
 
 @Component({
   selector: 'app-details',
@@ -15,8 +22,8 @@ export class DetailsComponent implements OnInit {
   public numberOfMedals = 0;
   public numberofAthletes = 0;
 
-  public participationData: Array<Participation> = [];
-  public olympics$: Observable<any> = of(null);
+  public participationData: Participation[] = [];
+  public olympics$: Observable<OlympicCountry[]> = of([]);
 
   constructor(
     private olympicService: OlympicService,
@@ -26,43 +33,47 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.countryName = this.route.snapshot.params['country'];
-    this.olympics$ = this.olympicService.getOlympics().pipe(
-      catchError((error) => {
-        console.error('Error fetching Olympic data:', error);
-        return of(null);
-      }),
-      tap((formattedData) => {
-        if (formattedData) {
-          this.participationData = this.extractParticipationData(formattedData);
-          const { numberOfEntries, numberOfMedals, numberofAthletes } =
-            this.calculateStatistics(this.participationData);
+    this.olympicService
+      .getOlympics()
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching Olympic data:', error);
+          return of(null);
+        }),
+        tap((formattedData) => {
+          console.log(formattedData);
+          if (formattedData) {
+            const dataArray = Array.isArray(formattedData)
+              ? formattedData
+              : [formattedData];
+            this.participationData = this.extractParticipationData(dataArray);
+            const { numberOfEntries, numberOfMedals, numberofAthletes } =
+              this.calculateStatistics(this.participationData);
 
-          this.numberOfEntries = numberOfEntries;
-          this.numberOfMedals = numberOfMedals;
-          this.numberofAthletes = numberofAthletes;
-        }
-      })
-    );
+            this.numberOfEntries = numberOfEntries;
+            this.numberOfMedals = numberOfMedals;
+            this.numberofAthletes = numberofAthletes;
+          }
+        })
+      )
+      .subscribe();
   }
 
-  private extractParticipationData(data: any) {
-    // Check if the 'country' input is provided and not an empty string
+  private extractParticipationData(data: OlympicCountry[]): Participation[] {
     if (this.countryName && this.countryName.trim() !== '') {
-      // Filter data based on the 'country' input value
       const selectedCountry = data.find(
-        (item: any) => item.country === this.countryName
+        (item) => item.country === this.countryName
       );
 
-      // Check if the selected country is found
       if (selectedCountry) {
-        return selectedCountry.participations;
+        return selectedCountry.participations || [];
       } else {
         console.warn(`Country '${this.countryName}' not found in the data.`);
-        this.participationData = [];
+        return [];
       }
     } else {
       console.warn('Country input is not provided or is an empty string.');
-      this.participationData = [];
+      return [];
     }
   }
 
@@ -70,15 +81,14 @@ export class DetailsComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  private calculateStatistics(data: any) {
+  private calculateStatistics(data: Participation[]): Statistics {
     const numberOfEntries = data.length;
     const numberOfMedals = data.reduce(
-      (totalMedals: any, participation: any) =>
-        totalMedals + participation.medalsCount,
+      (totalMedals, participation) => totalMedals + participation.medalsCount,
       0
     );
     const numberofAthletes = data.reduce(
-      (totalAthletes: any, participation: any) =>
+      (totalAthletes, participation) =>
         totalAthletes + participation.athleteCount,
       0
     );
