@@ -17,7 +17,7 @@ export class OlympicService {
   loadInitialData() {
     return this.http.get<OlympicCountry>(this.olympicUrl).pipe(
       tap((value) => {
-        console.log('Fetched Olympic Data:', value);
+        //console.log('Fetched Olympic Data:', value);
         this.olympics$.next(value);
       }),
       catchError((error, caught) => {
