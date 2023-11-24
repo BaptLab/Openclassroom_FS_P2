@@ -1,6 +1,15 @@
 # TO DO :
 
-- deal with error cases ;
+home.component.ts
+
+- les statistiques (number of JO, number of country) et le titre de la page sont absents. Il faut les ajouter.
+- L'observable doit être désouscrit à la fin de vie du composant (exemple : https://blog.bitsrc.io/6-ways-to-unsubscribe-from-observables-in-angular-ab912819a78f)
+
+Bug :
+
+- lorsqu'on renseigne un pay inexistant, l'application affiche une page blanche. Il faut plutôt rediriger vers la page "not-found"
+- Utiliser un composant réutilisable "header.component.ts" qu'on pourra utiliser pour la page d'accueil et la page de détail d'un pays
+- ce composant réutilisable aura en entré le titre de la page et une liste de statistiques.
 
 # Introduction
 

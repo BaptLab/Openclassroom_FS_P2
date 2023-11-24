@@ -50,7 +50,7 @@ export class PieChartComponent implements OnInit {
   }
 
   // Method to set up the Chart.js pie chart
-  private setUpPieChart() {
+  private setUpPieChart(): void {
     // Create a new Chart.js instance with specified options
     this.pieChart = new Chart<'pie', number[], string>('pie-canvas', {
       // Set the chart type to 'pie'

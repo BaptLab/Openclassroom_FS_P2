@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.countryName = this.route.snapshot.params['country'];
     this.olympicService
       .getOlympics()
@@ -39,7 +39,6 @@ export class DetailsComponent implements OnInit {
           return of(null);
         }),
         tap((formattedData) => {
-          console.log(formattedData);
           if (formattedData) {
             const dataArray = Array.isArray(formattedData)
               ? formattedData
@@ -75,7 +74,7 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  navigateToHomepage() {
+  navigateToHomepage(): void {
     this.router.navigateByUrl('');
   }
 

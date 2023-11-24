@@ -18,11 +18,10 @@ export class LineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.chartData);
     this.setUpLineChart();
   }
 
-  private setUpLineChart() {
+  private setUpLineChart(): void {
     this.lineChart = new Chart('line-chart-canvas', {
       type: 'line',
       data: {
