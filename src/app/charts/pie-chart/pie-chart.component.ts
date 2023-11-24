@@ -71,6 +71,8 @@ export class PieChartComponent implements OnInit {
           this.router.navigateByUrl('details/' + countryClicked);
         },
         animation: false, // Disable animation
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }
