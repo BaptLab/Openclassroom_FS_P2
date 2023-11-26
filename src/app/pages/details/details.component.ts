@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {
   OlympicCountry,
@@ -14,7 +14,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   public countryName = '';
   public numberOfEntries = 0;
   public numberOfMedals = 0;
@@ -22,6 +22,8 @@ export class DetailsComponent implements OnInit {
 
   public participationData: Participation[] = [];
   public olympics$: Observable<OlympicCountry[]> = of([]);
+
+  private olympicsSubscription: Subscription | undefined;
 
   constructor(
     private olympicService: OlympicService,
@@ -31,7 +33,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryName = this.route.snapshot.params['country'];
-    this.olympicService
+    this.olympicsSubscription = this.olympicService
       .getOlympics()
       .pipe(
         catchError((error) => {
@@ -43,34 +45,44 @@ export class DetailsComponent implements OnInit {
             const dataArray = Array.isArray(formattedData)
               ? formattedData
               : [formattedData];
-            this.participationData = this.extractParticipationData(dataArray);
-            const { numberOfEntries, numberOfMedals, numberofAthletes } =
-              this.calculateStatistics(this.participationData);
+            const selectedCountry = this.extractParticipationData(
+              dataArray,
+              this.countryName
+            );
 
-            this.numberOfEntries = numberOfEntries;
-            this.numberOfMedals = numberOfMedals;
-            this.numberofAthletes = numberofAthletes;
+            if (selectedCountry) {
+              this.participationData = selectedCountry.participations || [];
+              const { numberOfEntries, numberOfMedals, numberofAthletes } =
+                this.calculateStatistics(this.participationData);
+
+              this.numberOfEntries = numberOfEntries;
+              this.numberOfMedals = numberOfMedals;
+              this.numberofAthletes = numberofAthletes;
+            } else {
+              console.warn(
+                `Country '${this.countryName}' not found in the data.`
+              );
+              this.router.navigateByUrl('/not-found');
+            }
           }
         })
       )
       .subscribe();
   }
 
-  private extractParticipationData(data: OlympicCountry[]): Participation[] {
-    if (this.countryName && this.countryName.trim() !== '') {
-      const selectedCountry = data.find(
-        (item) => item.country === this.countryName
-      );
+  ngOnDestroy(): void {
+    this.olympicsSubscription?.unsubscribe();
+  }
 
-      if (selectedCountry) {
-        return selectedCountry.participations || [];
-      } else {
-        console.warn(`Country '${this.countryName}' not found in the data.`);
-        return [];
-      }
+  private extractParticipationData(
+    data: OlympicCountry[],
+    countryName: string
+  ): OlympicCountry | null {
+    if (countryName && countryName.trim() !== '') {
+      return data.find((item) => item.country === countryName) || null;
     } else {
       console.warn('Country input is not provided or is an empty string.');
-      return [];
+      return null;
     }
   }
 
