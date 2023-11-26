@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+
 import {
   OlympicCountry,
   Participation,
@@ -15,10 +16,10 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-  public countryName = '';
-  public numberOfEntries = 0;
-  public numberOfMedals = 0;
-  public numberofAthletes = 0;
+  public countryName: string = '';
+  public numberOfEntries: number = 0;
+  public numberOfMedals: number = 0;
+  public numberofAthletes: number = 0;
 
   public participationData: Participation[] = [];
   public olympics$: Observable<OlympicCountry[]> = of([]);
@@ -28,7 +29,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   constructor(
     private olympicService: OlympicService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
               this.numberOfEntries = numberOfEntries;
               this.numberOfMedals = numberOfMedals;
               this.numberofAthletes = numberofAthletes;
+              this.cdRef.detectChanges();
             } else {
               console.warn(
                 `Country '${this.countryName}' not found in the data.`

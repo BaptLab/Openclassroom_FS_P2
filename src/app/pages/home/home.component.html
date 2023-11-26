@@ -1,6 +1,4 @@
-<h2>Medals per Country</h2>
-
-<hr />
+<app-header [data]="dataInput"></app-header>
 
 <div id="pie-chart-container" *ngIf="dataInput.length > 0">
   <app-pie-chart [data]="dataInput"></app-pie-chart>

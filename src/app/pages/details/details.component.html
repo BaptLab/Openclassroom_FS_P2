@@ -1,22 +1,6 @@
 <button (click)="navigateToHomepage()">Retour</button>
 <div *ngIf="participationData && participationData.length > 0">
-  <div id="global-stats-container">
-    <h1>Medals per Country</h1>
-    <div class="stat-container">
-      <div class="single-stat-container">
-        <h2>Number of entries</h2>
-        <span>{{ numberOfEntries }}</span>
-      </div>
-      <div class="single-stat-container">
-        <h2>Total number of medals</h2>
-        <span>{{ numberOfMedals }}</span>
-      </div>
-      <div class="single-stat-container">
-        <h2>Total number of athletes</h2>
-        <span>{{ numberofAthletes }}</span>
-      </div>
-    </div>
-  </div>
+  <app-header></app-header>
   <div id="line-chart-container">
     <app-line-chart
       [chartData]="participationData"
