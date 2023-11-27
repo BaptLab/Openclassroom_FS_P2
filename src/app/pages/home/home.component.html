@@ -1,5 +1,8 @@
-<app-header [data]="dataInput"></app-header>
-
+<app-header
+  *ngIf="dataInput.length > 0"
+  [headerTitleToDisplay]="headerTitle"
+  [data]="dataFormattedForHeader"
+></app-header>
 <div id="pie-chart-container" *ngIf="dataInput.length > 0">
   <app-pie-chart [data]="dataInput"></app-pie-chart>
 </div>

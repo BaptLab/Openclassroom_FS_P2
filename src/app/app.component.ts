@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { OlympicService } from './core/services/olympic.service';
+import { OlympicService } from './core/services/olympicService/olympic.service';
 
 @Component({
   selector: 'app-root',

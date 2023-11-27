@@ -1,17 +1,11 @@
 <div id="global-stats-container">
-  <h1>{{ headerTitle }}</h1>
+  <h1>{{ headerTitleToDisplay }}</h1>
   <div class="stat-container">
-    <div *ngIf="numberOfEntries != 0" class="single-stat-container">
-      <h2>Number of entries</h2>
-      <span>{{ numberOfEntries }}</span>
-    </div>
-    <div *ngIf="numberOfMedals != 0" class="single-stat-container">
-      <h2>Total number of medals</h2>
-      <span>{{ numberOfMedals }}</span>
-    </div>
-    <div *ngIf="numberofAthletes != 0" class="single-stat-container">
-      <h2>Total number of athletes</h2>
-      <span>{{ numberofAthletes }}</span>
+    <div *ngFor="let stat of stats">
+      <div class="single-stat-container">
+        <h2>{{ stat.title }}</h2>
+        <span>{{ stat.value }}</span>
+      </div>
     </div>
   </div>
 </div>

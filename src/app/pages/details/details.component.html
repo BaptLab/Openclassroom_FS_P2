@@ -1,6 +1,9 @@
 <button (click)="navigateToHomepage()">Retour</button>
 <div *ngIf="participationData && participationData.length > 0">
-  <app-header></app-header>
+  <app-header
+    [data]="dataFormattedForHeader"
+    [headerTitleToDisplay]="headerTitle"
+  ></app-header>
   <div id="line-chart-container">
     <app-line-chart
       [chartData]="participationData"

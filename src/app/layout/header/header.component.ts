@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OlympicCountry } from 'src/app/core/models/Olympic';
+import { HeaderStatModel } from 'src/app/core/models/HeaderStatModel';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +7,14 @@ import { OlympicCountry } from 'src/app/core/models/Olympic';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() data: OlympicCountry[] = [];
+  @Input() data: Array<HeaderStatModel> = [];
+  @Input() headerTitleToDisplay: string = '';
 
-  public headerTitle = '';
-  public numberOfEntries = 0;
-  public numberOfMedals = 0;
-  public numberofAthletes = 0;
+  public stats: Array<HeaderStatModel> = [];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.stats = this.data;
+  }
 }

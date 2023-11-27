@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { OlympicCountry } from '../models/Olympic';
+import { OlympicCountry } from '../../models/Olympic';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,9 @@ export class OlympicService {
 
   constructor(private http: HttpClient) {}
 
-  loadInitialData() {
+  loadInitialData(): Observable<OlympicCountry | null> {
     return this.http.get<OlympicCountry>(this.olympicUrl).pipe(
       tap((value) => {
-        console.log('Fetched Olympic Data:', value);
         this.olympics$.next(value);
       }),
       catchError((error, caught) => {

@@ -1,11 +1,3 @@
-# TO DO :
-
-home.component.ts
-
-- Utiliser un composant réutilisable "header.component.ts" qu'on pourra utiliser pour la page d'accueil et la page de détail d'un pays - ce composant réutilisable aura en entré le titre de la page et une liste de statistiques.
-
-- les statistiques (number of JO, number of country) et le titre de la page sont absents. Il faut les ajouter.
-
 # Introduction
 
 Il s'agit du projet n°2 de la formation de Développeur Full-Stack - Java et Angular d'Openclassroom.
