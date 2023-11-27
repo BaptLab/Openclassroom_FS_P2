@@ -97,7 +97,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       .pipe(
         catchError((error) => {
           console.error('Error fetching Olympic data:', error);
-
           return of(null);
         }),
         tap((formattedData) => {

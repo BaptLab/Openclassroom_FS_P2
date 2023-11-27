@@ -33,8 +33,12 @@ export class HomeComponent implements OnInit {
     dataToFormat: Array<OlympicCountry>
   ): Array<HeaderStatModel> {
     if (dataToFormat.length > 0) {
+      console.log(dataToFormat);
       this.dataFormattedForHeader.push(
-        new HeaderStatModel('Number of JOs', dataToFormat.length),
+        new HeaderStatModel(
+          'Number of JOs',
+          dataToFormat[0].participations.length
+        ),
         new HeaderStatModel('Number of countries', dataToFormat.length)
       );
     }
