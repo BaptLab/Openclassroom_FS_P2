@@ -1,4 +1,10 @@
 <button (click)="navigateToHomepage()">Retour</button>
+<div
+  class="loading-msg"
+  *ngIf="!participationData || participationData.length === 0"
+>
+  Loading...
+</div>
 <div *ngIf="participationData && participationData.length > 0">
   <app-header
     [data]="dataFormattedForHeader"
