@@ -97,9 +97,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       .pipe(
         catchError((error) => {
           console.error('Error fetching Olympic data:', error);
-          console.warn(`Country '${this.countryName}' not found in the data.`);
-          //if there is no data, redirection to error page
-          this.router.navigateByUrl('/not-found');
+
           return of(null);
         }),
         tap((formattedData) => {
@@ -130,6 +128,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 this.numberOfMedals,
                 this.numberofAthletes
               );
+            } else {
+              console.warn(
+                `Country '${this.countryName}' not found in the data.`
+              );
+              //if there is no data, redirection to error page
+              this.router.navigateByUrl('/not-found');
             }
           }
         })
